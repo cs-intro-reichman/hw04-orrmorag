@@ -1,45 +1,40 @@
 public class Primes {
     public static void main(String[] args) {
-        if (args.length == 0) {
-            System.out.println("Usage: java Primes <number>");
-            return;
-        }
-        try {
-            int n = Integer.parseInt(args[0]);
-            if (n <= 1) {
-                System.out.println("No primes between 2 and " + n);
-                return;
-            }
-            System.out.println("Prime numbers up to " + n + ":");
-            findPrimes(n);
+        int n = Integer.parseInt(args[0]);
 
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid input. Please provide an integer.");
-        }
-    }
-    
-    public static void findPrimes(int n) {
         boolean[] isPrime = new boolean[n + 1];
-        for (int i = 2; i <= n; i++) {
+        int i = 2;
+        while (i <= n) {
             isPrime[i] = true;
+            i++;
         }
+
         int p = 2;
         while (p * p <= n) {
             if (isPrime[p]) {
-                for (int i = p * p; i <= n; i += p) {
-                    isPrime[i] = false;
+                int j = p * p;
+                while (j <= n) {
+                    isPrime[j] = false;
+                    j += p;
                 }
             }
             p++;
         }
+
+        System.out.println("Prime numbers up to " + n + ":");
         int count = 0;
-        for (int i = 2; i <= n; i++) {
-            if (isPrime[i]) {
-                System.out.println(i);
+        int k = 2;
+
+        while (k <= n) {
+            if (isPrime[k]) {
+                System.out.println(k);
                 count++;
             }
+            k++;
         }
-        System.out.println("There are " + count + " primes between 2 and " + n + 
-                           " (" + String.format("%.0f", (double)count * 100 / (n - 1)) + "% are primes)");
+
+        int percentage = (int) Math.round((count * 100.0) / n);
+        System.out.println("There are " + count + " primes between 2 and " + n +
+                           " (" + percentage + "% are primes)");
     }
 }
