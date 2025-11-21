@@ -70,6 +70,9 @@ public class ArrCharOps {
      */
     public static int indexOf(char[] arr, char ch, int fromIndex) {
         int start = Math.max(0, fromIndex);
+        if (start >= arr.length) {
+            return -1;
+        }
         for (int i = start; i < arr.length; i++) {
             if (arr[i] == ch) {
                 return i;
