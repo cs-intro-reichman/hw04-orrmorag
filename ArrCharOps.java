@@ -69,10 +69,7 @@ public class ArrCharOps {
     /** Same as indexOf(char[], char), but starts the search in the given index.
      */
     public static int indexOf(char[] arr, char ch, int fromIndex) {
-        int start = fromIndex;
-        if (fromIndex < 0) {
-            start = 0;
-        }
+        int start = Math.max(0, fromIndex);
         for (int i = start; i < arr.length; i++) {
             if (arr[i] == ch) {
                 return i;
